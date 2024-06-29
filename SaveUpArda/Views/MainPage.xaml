@@ -15,8 +15,11 @@
             <Setter Property="BackgroundColor" Value="#4CAF50" />
             <Setter Property="TextColor" Value="White" />
             <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Padding" Value="10, 5" />
             <Setter Property="Margin" Value="10, 5" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="TextColor" Value="#333333" />
             <Setter Property="FontSize" Value="16" />
         </Style>
     </ContentPage.Resources>
