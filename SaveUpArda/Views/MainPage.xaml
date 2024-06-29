@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SaveUpArda.Views"
+             xmlns:vm="clr-namespace:SaveUpArda.ViewModels"
+             x:Class="SaveUpArda.Views.MainPage"
+             BackgroundColor="#f0f0f5">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor" Value="#4CAF50" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="10, 5" />
+            <Setter Property="Margin" Value="10, 5" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout Padding="20">
+        <Label Text="Willkommen bei SaveUpArda" 
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="#333333"
+               HorizontalOptions="Center" 
+               VerticalOptions="StartAndExpand" />
+
+        <StackLayout Orientation="Vertical" Spacing="10">
+            <Button Text="Artikel erfassen"
+                    Command="{Binding NavigateToAddItemCommand}"
+                    WidthRequest="200"
+                    HeightRequest="50" />
+
+            <Button Text="Liste anzeigen"
+                    Command="{Binding NavigateToListCommand}"
+                    WidthRequest="200"
+                    HeightRequest="50" />
+        </StackLayout>
+
+        <Label Text="{Binding TotalSaved, StringFormat='Gesamtsumme: {0:C}'}"
+               FontSize="24"
+               FontAttributes="Bold"
+               TextColor="#333333"
+               HorizontalOptions="Center"
+               VerticalOptions="EndAndExpand" />
+    </StackLayout>
+</ContentPage>

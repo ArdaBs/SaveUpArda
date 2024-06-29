@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:SaveUpArda.Views"
+       x:Class="SaveUpArda.AppShell"
+       FlyoutBehavior="Flyout">
+
+    <FlyoutItem Title="Home" Icon="home.png">
+        <ShellContent Title="Home" ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Add Item" Icon="add.png">
+        <ShellContent Title="Add Item" ContentTemplate="{DataTemplate local:AddItemPage}" Route="AddItemPage" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Items List" Icon="list.png">
+        <ShellContent Title="Items List" ContentTemplate="{DataTemplate local:ItemsListPage}" Route="ItemsListPage" />
+    </FlyoutItem>
+
+</Shell>
