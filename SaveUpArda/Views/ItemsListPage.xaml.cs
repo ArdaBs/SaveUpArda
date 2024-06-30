@@ -4,10 +4,11 @@ namespace SaveUpArda.Views
 {
     public partial class ItemsListPage : ContentPage
     {
-        public ItemsListPage(ItemsListViewModel viewModel)
+        public ItemsListPage(MainViewModel mainViewModel)
         {
             InitializeComponent();
-            BindingContext = viewModel;
+            BindingContext = new ItemsListViewModel(mainViewModel);
         }
     }
+
 }

@@ -4,6 +4,8 @@ using SaveUpArda.Models;
 using SaveUpArda.Services;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System;
+using Microsoft.Maui.Controls;
 
 namespace SaveUpArda.ViewModels
 {
@@ -18,13 +20,16 @@ namespace SaveUpArda.ViewModels
         [ObservableProperty]
         private ObservableCollection<Item> items;
 
+        private readonly MainViewModel _mainViewModel;
+
         /// <summary>
         /// Initializes a new instance of the ItemsListViewModel class.
         /// </summary>
         /// <param name="mainViewModel">The main view model to get the items collection from.</param>
         public ItemsListViewModel(MainViewModel mainViewModel)
         {
-            Items = mainViewModel.Items;
+            _mainViewModel = mainViewModel;
+            Items = new ObservableCollection<Item>(mainViewModel.Items);
         }
 
         /// <summary>
@@ -34,8 +39,33 @@ namespace SaveUpArda.ViewModels
         [RelayCommand]
         private void DeleteItem(Item item)
         {
-            ItemService.DeleteItem(item);
-            Items.Remove(item);
+            try
+            {
+                ItemService.DeleteItem(item);
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    if (Items.Contains(item))
+                    {
+                        Items.Remove(item);
+                        Console.WriteLine($"Item removed: {item.Description}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Item not found in collection.");
+                    }
+                    _mainViewModel.UpdateItems();
+                });
+            }
+            catch (ObjectDisposedException ex)
+            {
+                // Log the error or handle it appropriately
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Catch other exceptions that might occur
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -44,8 +74,26 @@ namespace SaveUpArda.ViewModels
         [RelayCommand]
         private void ClearAll()
         {
-            ItemService.ClearAllItems();
-            Items.Clear();
+            try
+            {
+                ItemService.ClearAllItems();
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    Items.Clear();
+                    Console.WriteLine("All items cleared.");
+                    _mainViewModel.UpdateItems();
+                });
+            }
+            catch (ObjectDisposedException ex)
+            {
+                // Log the error or handle it appropriately
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Catch other exceptions that might occur
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+            }
         }
 
         /// <summary>
