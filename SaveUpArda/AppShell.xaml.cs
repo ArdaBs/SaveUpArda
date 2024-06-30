@@ -8,6 +8,7 @@ namespace SaveUpArda
         public AppShell()
         {
             InitializeComponent();
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(AddItemPage), typeof(AddItemPage));
             Routing.RegisterRoute(nameof(ItemsListPage), typeof(ItemsListPage));
         }

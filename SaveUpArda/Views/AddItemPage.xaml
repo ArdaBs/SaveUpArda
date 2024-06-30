@@ -2,29 +2,57 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SaveUpArda.Views.AddItemPage"
-             BackgroundColor="#f0f0f5"
+             BackgroundColor="#ECECEC"
              Title="Add Item">
 
     <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="CornerRadius" Value="20" />
+            <Setter Property="Padding" Value="20" />
+            <Setter Property="Margin" Value="10, 50, 10, -50" />
+            <!-- Negative Margin unten -->
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="BackgroundColor" Value="#FAFAFA" />
+        </Style>
         <Style TargetType="Entry">
-            <Setter Property="BackgroundColor" Value="White" />
+            <Setter Property="BackgroundColor" Value="#FFFFFF" />
             <Setter Property="TextColor" Value="#333333" />
             <Setter Property="FontSize" Value="16" />
-            <Setter Property="Margin" Value="0,10,0,10" />
             <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="Margin" Value="10,5" />
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#4CAF50" />
+            <Setter Property="BackgroundColor" Value="#FFA500" />
             <Setter Property="TextColor" Value="White" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Margin" Value="10, 5" />
             <Setter Property="FontSize" Value="16" />
+            <Setter Property="HeightRequest" Value="50" />
         </Style>
     </ContentPage.Resources>
 
-    <StackLayout Padding="20">
-        <Entry Placeholder="Kurzbeschreibung" Text="{Binding Description}" />
-        <Entry Placeholder="Preis" Keyboard="Numeric" Text="{Binding Price}" />
-        <Button Text="Speichern" Command="{Binding SaveItemCommand}" />
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Content -->
+        <ScrollView Grid.Row="1">
+            <StackLayout Padding="10" VerticalOptions="FillAndExpand">
+                <Label Text="Add Saving" FontSize="28" FontAttributes="Bold" TextColor="#333333" HorizontalOptions="Center" />
+                <Label Text="How much would you like to save and which product?" FontSize="16" TextColor="#888888" HorizontalOptions="Center" Margin="0,10,0,20" />
+
+                <Frame HeightRequest="590" VerticalOptions="Start">
+                    <StackLayout VerticalOptions="FillAndExpand" Spacing="20">
+                        <Entry Placeholder="Product name" Text="{Binding Description}" />
+                        <Entry Placeholder="CHF 0.00" Text="{Binding Price}" Keyboard="Numeric" />
+                        <Button Text="Continue" Command="{Binding SaveItemCommand}" VerticalOptions="EndAndExpand" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
 </ContentPage>

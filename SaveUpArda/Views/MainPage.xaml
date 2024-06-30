@@ -1,54 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:SaveUpArda.Views"
-             xmlns:vm="clr-namespace:SaveUpArda.ViewModels"
              x:Class="SaveUpArda.Views.MainPage"
-             BackgroundColor="#f0f0f5">
-
-    <ContentPage.BindingContext>
-        <vm:MainViewModel />
-    </ContentPage.BindingContext>
+             BackgroundColor="#ECECEC"
+             Title="Home Page">
 
     <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Setter Property="BackgroundColor" Value="#4CAF50" />
-            <Setter Property="TextColor" Value="White" />
+        <Style TargetType="Frame">
             <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Margin" Value="10, 5" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Padding" Value="15" />
+            <Setter Property="Margin" Value="10,5" />
+            <Setter Property="HasShadow" Value="True" />
+            <Setter Property="BackgroundColor" Value="White" />
         </Style>
         <Style TargetType="Label">
-            <Setter Property="TextColor" Value="#333333" />
             <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="#333333" />
         </Style>
     </ContentPage.Resources>
 
-    <StackLayout Padding="20">
-        <Label Text="Willkommen bei SaveUpArda" 
-               FontSize="24"
-               FontAttributes="Bold"
-               TextColor="#333333"
-               HorizontalOptions="Center" 
-               VerticalOptions="StartAndExpand" />
+    <Grid RowDefinitions="Auto, *, Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
-        <StackLayout Orientation="Vertical" Spacing="10">
-            <Button Text="Artikel erfassen"
-                    Command="{Binding NavigateToAddItemCommand}"
-                    WidthRequest="200"
-                    HeightRequest="50" />
+        <!-- Content -->
+        <ScrollView Grid.Row="1" Grid.Column="0">
+            <StackLayout Padding="10">
+                <Label Text="Welcome to SaveUp" FontSize="28" FontAttributes="Bold" TextColor="#333333" HorizontalOptions="Center" />
 
-            <Button Text="Liste anzeigen"
-                    Command="{Binding NavigateToListCommand}"
-                    WidthRequest="200"
-                    HeightRequest="50" />
-        </StackLayout>
+                <Label Text="Total Savings:" FontSize="20" FontAttributes="Bold" TextColor="#333333" HorizontalOptions="Center" Margin="0,10,0,0" />
+                <Label Text="{Binding TotalSaved, StringFormat='Gesamtsumme: {0:C}'}" FontSize="20" FontAttributes="Bold" TextColor="#333333" HorizontalOptions="Center" Margin="0,0,0,20" />
 
-        <Label Text="{Binding TotalSaved, StringFormat='Gesamtsumme: {0:C}'}"
-               FontSize="24"
-               FontAttributes="Bold"
-               TextColor="#333333"
-               HorizontalOptions="Center"
-               VerticalOptions="EndAndExpand" />
-    </StackLayout>
+                <!-- Other content -->
+                <Frame>
+                    <StackLayout>
+                        <Label Text="SaveUp App" FontSize="20" FontAttributes="Bold" />
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="lock.png" WidthRequest="50" HeightRequest="50" />
+                            <Label Text="Welcome to SaveUp! Track your savings and see how your savings grow" VerticalOptions="Center" LineBreakMode="WordWrap" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <Frame>
+                    <StackLayout>
+                        <Label Text="Information" FontSize="20" FontAttributes="Bold" />
+                        <StackLayout Orientation="Horizontal">
+                            <Image Source="trophy_icon.png" WidthRequest="50" HeightRequest="50" />
+                            <Label Text="This app is free to use! The developer Arda Dursun would appreciate it if any bugs are reported to: arda.dursun@student.ipso.ch" VerticalOptions="Center" LineBreakMode="WordWrap" HorizontalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Add Savings Button -->
+        <Grid Grid.Row="2" Grid.Column="0" Padding="10">
+            <Button Text="+ Add Savings" Command="{Binding NavigateToAddItemCommand}" BackgroundColor="#FFA500" TextColor="White" FontAttributes="Bold" CornerRadius="10" HorizontalOptions="FillAndExpand" VerticalOptions="End" />
+        </Grid>
+    </Grid>
 </ContentPage>
